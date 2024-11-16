@@ -48,10 +48,12 @@ app.get("/api/posts/:id", (req,res,next)=> {
 app.post("/api/create", (req, res, next)=> {
     try {
         const newPost = {
-            "id": generateId,
+            "id": generateId(),
             ...req.body
         }
         posts.push(newPost);
+
+        console.log(newPost);
         console.log("New post created!");
         res.json(newPost).status(201);
     } catch (error) {
