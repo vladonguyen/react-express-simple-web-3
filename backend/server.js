@@ -41,6 +41,22 @@ app.get("/api/posts/:id", (req,res,next)=> {
     } catch (error) {
         next(error);
     }
+});
+
+//POST CREATE
+
+app.post("/api/create", (req, res, next)=> {
+    try {
+        const newPost = {
+            "id": generateId,
+            ...req.body
+        }
+        posts.push(newPost);
+        console.log("New post created!");
+        res.json(newPost).status(201);
+    } catch (error) {
+        next(error);
+    }
 })
 
 
