@@ -4,6 +4,7 @@ import Home, { allPostsLoader } from "./pages/Home";
 import PostId, { loaderPostById } from "./pages/PostId";
 import Create from "./pages/Create";
 import { actionCreateEdit } from "./components/CreateEditForm";
+import Edit from "./pages/Edit";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,9 +23,19 @@ function App() {
       },
       {
         path:"posts/:id",
-        element: <PostId />,
-        loader: loaderPostById
-
+        id: "postId",
+        children: [{
+          index: true,
+          element: <PostId />,
+          loader: loaderPostById,
+        },
+          {
+            path: "edit",
+            element: <Edit />,
+            loader: loaderPostById,
+            action: actionCreateEdit
+          }
+        ]
       }]
     }
   ])

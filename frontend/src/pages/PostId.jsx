@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 export default function PostId(){
 const singlePost = useLoaderData();
@@ -7,6 +7,8 @@ const singlePost = useLoaderData();
         <>
         <h1>{singlePost.title}</h1>
         <h1>{singlePost.desc}</h1>
+        <p><Link to="edit">Edit</Link></p>
+        <p><Link to="delete">Delete</Link></p>
         </>
     )
 }

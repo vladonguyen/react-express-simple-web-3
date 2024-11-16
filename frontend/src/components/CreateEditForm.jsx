@@ -1,19 +1,21 @@
 import { Form, redirect } from "react-router-dom";
 
-export default function CreateEditForm({ method }) {
+export default function CreateEditForm({ method, id, title, desc }) {
 
     return (
         <>
             <Form method={method} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                <input type="text" name="title" placeholder="Title" />
-                <textarea name="desc" placeholder="Description"></textarea>
-                <button>Submit</button>
+                <input type="text" name="title" placeholder="Title" defaultValue={title? title : ""} />
+                <textarea name="desc" placeholder="Description"  defaultValue={desc? desc : ""}></textarea>
+                <button>{method === "POST"? "Create" : "Edit"}</button>
             </Form>
         </>
     )
 }
 
 export async function actionCreateEdit({ request, params }) {
+    const method = request.method;
+    console.log("method", method)
     try {
         const data = await request.formData();
         const dataFormNames = {
@@ -25,8 +27,12 @@ export async function actionCreateEdit({ request, params }) {
 
         let url = "http://localhost:8080/api/create";
 
+        if(method === "PATCH"){
+            url = `http://localhost:8080/api/posts/${params.id}`
+        }
+
         const response = await fetch(url, {
-            method: request.method,
+            method: method,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dataFormNames)
         });

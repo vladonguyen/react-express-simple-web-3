@@ -59,6 +59,26 @@ app.post("/api/create", (req, res, next)=> {
     } catch (error) {
         next(error);
     }
+});
+
+//PATCH EDIT POST
+
+app.patch("/api/posts/:id", (req, res, next)=> {
+    try {
+
+        const postIndex = posts.findIndex((post) => post.id == req.params.id);
+        console.log("Edit single post with id " + postIndex)
+
+        const editPost = {
+            "id": generateId(),
+            ...req.body
+        }
+        posts[postIndex] = editPost;
+
+        res.json(editPost).status(201);
+    } catch (error) {
+        next(error);
+    }
 })
 
 
