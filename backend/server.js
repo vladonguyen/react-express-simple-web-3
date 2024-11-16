@@ -13,7 +13,12 @@ app.use((req,res,next)=>{
 //setHeader very important!!!
 
 //CREATE STORE VARIABLE
-let posts = [];
+
+//no posts
+// let posts = [];
+
+// default post
+let posts = [{"id": 1, "title": "Example title", "desc": "Example desc."}];
 
 //GET ALL POSTS
 app.get("/api/posts", (req,res,next)=>{
