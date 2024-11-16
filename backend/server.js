@@ -28,7 +28,22 @@ app.get("/api/posts", (req,res,next)=>{
     } catch (error) {
         next(error);
     }
+});
+
+//GET POST BY ID
+
+app.get("/api/posts/:id", (req,res,next)=> {
+    try {
+        const postIndex = posts.findIndex((post) => post.id == req.params.id);
+        console.log("Get single post with id " + postIndex)
+        const singlePost = posts[postIndex];
+        res.json(singlePost);
+    } catch (error) {
+        next(error);
+    }
 })
+
+
 
 
 app.listen(8080, ()=> console.log("Backend server started at port 8080. Write to express variable"));

@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import AllPosts from "../components/AllPosts";
 
 export default function Home(){
     const posts = useLoaderData();
@@ -8,6 +9,11 @@ export default function Home(){
     return(
         <>
         <h1>Home</h1>
+        <h2>All posts</h2>
+        {posts.map((post)=> (
+            <AllPosts key={post.id} id={post.id} title={post.title} desc={post.desc} />
+        )
+        )}
         </>
     )
 }
