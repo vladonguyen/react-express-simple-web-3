@@ -1,11 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const {v4:generateId} = require("uuid");
+const { v4: generateId } = require("uuid");
 
 const app = express();
 app.use(bodyParser.json());
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -19,10 +19,10 @@ app.use((req,res,next)=>{
 // let posts = [];
 
 // default post
-let posts = [{"id": 1, "title": "Example title", "desc": "Example desc."}];
+let posts = [{ "id": 1, "title": "Example title", "desc": "Example desc." }];
 
 //GET ALL POSTS
-app.get("/api/posts", (req,res,next)=>{
+app.get("/api/posts", (req, res, next) => {
     try {
         res.json(posts);
     } catch (error) {
@@ -32,7 +32,7 @@ app.get("/api/posts", (req,res,next)=>{
 
 //GET POST BY ID
 
-app.get("/api/posts/:id", (req,res,next)=> {
+app.get("/api/posts/:id", (req, res, next) => {
     try {
         const postIndex = posts.findIndex((post) => post.id == req.params.id);
         console.log("Get single post with id " + postIndex)
@@ -45,7 +45,7 @@ app.get("/api/posts/:id", (req,res,next)=> {
 
 //POST CREATE
 
-app.post("/api/create", (req, res, next)=> {
+app.post("/api/create", (req, res, next) => {
     try {
         const newPost = {
             "id": generateId(),
@@ -63,7 +63,7 @@ app.post("/api/create", (req, res, next)=> {
 
 //PATCH EDIT POST
 
-app.patch("/api/posts/:id", (req, res, next)=> {
+app.patch("/api/posts/:id", (req, res, next) => {
     try {
 
         const postIndex = posts.findIndex((post) => post.id == req.params.id);
@@ -79,10 +79,23 @@ app.patch("/api/posts/:id", (req, res, next)=> {
     } catch (error) {
         next(error);
     }
+});
+
+//DELETE post (splice)
+
+app.delete("/api/posts/:id/delete", (req, res, next) => {
+    try {
+        const postIndex = posts.findIndex((post) => post.id == req.params.id);
+        console.log("Delete single post with id " + postIndex)
+        res.json({ message: "Sucessful deletion" }).status(201);
+        posts.splice(postIndex);
+    } catch (error) {
+        next(error);
+    }
 })
 
 
 
 
-app.listen(8080, ()=> console.log("Backend server started at port 8080. Write to express variable"));
+app.listen(8080, () => console.log("Backend server started at port 8080. Write to express variable"));
 
