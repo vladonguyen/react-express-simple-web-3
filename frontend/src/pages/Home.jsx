@@ -10,10 +10,12 @@ export default function Home(){
         <>
         <h1>Home</h1>
         <h2>All posts</h2>
-        {posts.map((post)=> (
+        {posts.length > 0 && posts.map((post)=> (
             <AllPosts key={post.id} id={post.id} title={post.title} desc={post.desc} />
         )
         )}
+
+        {posts.length <= 0 && <h2>No posts to show!</h2>}
         </>
     )
 }

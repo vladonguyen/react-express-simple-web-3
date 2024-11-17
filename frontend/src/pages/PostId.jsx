@@ -8,6 +8,7 @@ export default function PostId() {
             <h1>{singlePost.title}</h1>
             <h1>{singlePost.desc}</h1>
             <p><Link to="edit">Edit</Link></p>
+            {/* Form method is very important to be set! */}
             <Form method="POST"><button>Delete</button></Form>
         </>
     )
