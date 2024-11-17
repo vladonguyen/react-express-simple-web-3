@@ -7,6 +7,7 @@ export default function Navigation(){
         <nav className={classes.navStyle}>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/create">Create Post</NavLink>
+            <NavLink to="/register">Register</NavLink>
         </nav>
     )
 }

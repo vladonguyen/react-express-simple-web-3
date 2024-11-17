@@ -5,6 +5,7 @@ import PostId, { askBeforeDelete, loaderPostById } from "./pages/PostId";
 import Create from "./pages/Create";
 import { actionCreateEdit } from "./components/CreateEditForm";
 import Edit from "./pages/Edit";
+import Register, { registerAction } from "./pages/Register";
 
 
 function App() {
@@ -16,6 +17,11 @@ function App() {
         index: true,
         element: <Home />,
         loader: allPostsLoader
+      },
+      {
+        path: "/register",
+        element: <Register />,
+        action: registerAction
       },
       {
         path: "/create",
