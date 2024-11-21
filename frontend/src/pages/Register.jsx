@@ -42,6 +42,7 @@ export async function registerAction({ request }) {
             throw { message: error.message || "something went wrong with registering user", status: error.status || 500 }
         }
 
+        return null
 
     }
 }

@@ -6,6 +6,7 @@ import Create from "./pages/Create";
 import { actionCreateEdit } from "./components/CreateEditForm";
 import Edit from "./pages/Edit";
 import Register, { registerAction } from "./pages/Register";
+import Login from "./pages/Login";
 
 
 function App() {
@@ -22,6 +23,11 @@ function App() {
         path: "/register",
         element: <Register />,
         action: registerAction
+      },
+      {
+        path: "/login",
+        element: <Login />,
+
       },
       {
         path: "/create",
