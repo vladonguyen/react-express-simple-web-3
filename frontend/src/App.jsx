@@ -6,7 +6,7 @@ import Create from "./pages/Create";
 import { actionCreateEdit } from "./components/CreateEditForm";
 import Edit from "./pages/Edit";
 import Register, { registerAction } from "./pages/Register";
-import Login from "./pages/Login";
+import Login, { actionLogin } from "./pages/Login";
 
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
       {
         path: "/login",
         element: <Login />,
+        action: actionLogin
 
       },
       {

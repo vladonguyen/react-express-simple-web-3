@@ -1,5 +1,5 @@
 const express = require("express");
-const { hash } = require("bcryptjs");
+const { hash, compare } = require("bcryptjs");
 
 const router = express.Router();
 
@@ -32,6 +32,33 @@ router.post("/register", async (req, res, next) => {
 
         users.push(newUser);
         res.json("User added successfully!");
+    } catch (error) {
+        next(error);
+    }
+
+});
+
+//Login new user
+
+router.post("/login", async (req, res, next) => {
+    // console.log("req", req);
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+        const emailIndex = users.findIndex((user) => user.email == email);
+        console.log(email, password, emailIndex);
+
+        if (emailIndex == -1) {
+            throw ({ message: "Email or username not matched or no such user!" });
+        } else if (password) {
+            const boolean = await compare(password, users[emailIndex].password);
+            if (!boolean) {
+                throw ({ message: "Email or username not matched or no such user!" });
+            }
+        }
+
+        console.log("Login successful!");
+        res.json("Login successful!");
     } catch (error) {
         next(error);
     }
