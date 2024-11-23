@@ -1,4 +1,4 @@
-import { NavLink, useRouteLoaderData } from "react-router-dom";
+import { Form, NavLink, useRouteLoaderData } from "react-router-dom";
 import classes from "./Navigation.module.css";
 
 export default function Navigation() {
@@ -10,6 +10,7 @@ export default function Navigation() {
             {token && <NavLink to="/create">Create Post</NavLink>}
             {!token && <NavLink to="/register">Register</NavLink>}
             {!token && <NavLink to="/login">Login</NavLink>}
+            {token && <NavLink to="/logout">Logout</NavLink>}
         </nav>
     )
 }

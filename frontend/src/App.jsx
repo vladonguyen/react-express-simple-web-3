@@ -7,7 +7,7 @@ import { actionCreateEdit } from "./components/CreateEditForm";
 import Edit from "./pages/Edit";
 import Register, { registerAction } from "./pages/Register";
 import Login, { actionLogin } from "./pages/Login";
-import { getToken } from "./utils/auth";
+import { deleteToken, getToken } from "./utils/auth";
 
 
 function App() {
@@ -32,6 +32,10 @@ function App() {
         element: <Login />,
         action: actionLogin
 
+      },
+      {
+        path:"/logout",
+        loader: deleteToken
       },
       {
         path: "/create",
