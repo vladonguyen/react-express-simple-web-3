@@ -1,10 +1,10 @@
 import classes from "./Login.module.css";
 
-import { Form } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 
-export default function Login(){
+export default function Login() {
 
-    return(
+    return (
         <Form method="post" className={classes.loginForm}>
             <h1>Login</h1>
             <input type="email" name="email" placeholder="Email" />
@@ -14,27 +14,27 @@ export default function Login(){
     )
 }
 
-export async function actionLogin({request}){
-try {
-    const data = await request.formData();
-    const loginData = {
-        email: data.get("email"),
-        password: data.get("password")
-    };
-   
- console.log(loginData);
+export async function actionLogin({ request }) {
+    try {
+        const data = await request.formData();
+        const loginData = {
+            email: data.get("email"),
+            password: data.get("password")
+        };
 
-    const response = await fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(loginData)
-    });
-    console.log("response", response);
-    return await response.json();
-} catch (error) {
-    throw (error.message || "Error login.")
-}
+        const response = await fetch("http://localhost:8080/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData)
+        });
+        const resData = await response.json();
+        const token = resData.token;
+        localStorage.setItem("token", token);
+        return redirect("/");
+    } catch (error) {
+        throw (error.message || "Error login.")
+    }
 
 }

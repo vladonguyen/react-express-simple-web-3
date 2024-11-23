@@ -7,6 +7,7 @@ import { actionCreateEdit } from "./components/CreateEditForm";
 import Edit from "./pages/Edit";
 import Register, { registerAction } from "./pages/Register";
 import Login, { actionLogin } from "./pages/Login";
+import { getToken } from "./utils/auth";
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
     {
       path: "/",
       element: <RootLayout />,
+      loader: getToken,
+      id: "routetoken",
       children: [{
         index: true,
         element: <Home />,
