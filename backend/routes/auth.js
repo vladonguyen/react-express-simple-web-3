@@ -1,9 +1,16 @@
 const express = require("express");
 const { hash, compare } = require("bcryptjs");
 
+const { createJSONwebToken, validateJSONwebToken } = require("../utils/auth");
+
 const router = express.Router();
 
-let users = [];
+let users = [
+    {
+        email: 'vladonguyen@gmail.com',
+        password: '$2a$12$svLZ0rPYd3grRMOYavP0Ou2r26Jhx/NEIyqK7ITOdddpKnEqUJIxe'
+    }
+];
 
 //Add new user
 router.post("/register", async (req, res, next) => {
@@ -31,6 +38,7 @@ router.post("/register", async (req, res, next) => {
         console.log("bcryptPass", bcryptPass);
 
         users.push(newUser);
+        console.log(users);
         res.json("User added successfully!");
     } catch (error) {
         next(error);
@@ -52,13 +60,16 @@ router.post("/login", async (req, res, next) => {
             throw ({ message: "Email or username not matched or no such user!" });
         } else if (password) {
             const boolean = await compare(password, users[emailIndex].password);
+            console.log("boolean", boolean)
             if (!boolean) {
                 throw ({ message: "Email or username not matched or no such user!" });
             }
         }
-
+        //need to add token return
+        const token = await createJSONwebToken(email);
         console.log("Login successful!");
-        res.json("Login successful!");
+        console.log("token", token);
+        res.json({email, token});
     } catch (error) {
         next(error);
     }
