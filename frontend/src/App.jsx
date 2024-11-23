@@ -8,17 +8,20 @@ import Edit from "./pages/Edit";
 import Register, { registerAction } from "./pages/Register";
 import Login, { actionLogin } from "./pages/Login";
 import { deleteToken, getToken } from "./utils/auth";
+import Error from "./pages/Error";
 
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      
       element: <RootLayout />,
       loader: getToken,
       id: "routetoken",
+      errorElement: <Error />,
       children: [{
         index: true,
+        path: "/",
         element: <Home />,
         loader: allPostsLoader
       },
