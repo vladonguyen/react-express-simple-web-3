@@ -77,7 +77,7 @@ router.delete("/api/posts/:id/delete", (req, res, next) => {
         const postIndex = posts.findIndex((post) => post.id == req.params.id);
         console.log("Delete single post with id " + postIndex)
         res.json({ message: "Sucessful deletion" }).status(201);
-        posts.splice(postIndex);
+        posts = posts.filter((post)=> post.id != req.params.id);
     } catch (error) {
         next(error);
     }
