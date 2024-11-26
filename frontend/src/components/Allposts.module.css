@@ -1,0 +1,16 @@
+div.singleNote {
+    border-radius: 1rem ;
+    background-color: #c5accfd5;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+div.singleNote h3{
+  color:#7337ab;
+}
+div.singleNote h3:hover{
+    color:#9248d7;
+  }
+div.singleNote p{
+    color:#581b92;
+  }

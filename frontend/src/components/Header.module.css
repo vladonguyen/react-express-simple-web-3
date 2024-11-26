@@ -1,0 +1,19 @@
+header.mainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+a.logo{
+    text-decoration: none;
+}
+
+a, a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #d2cae9
+}

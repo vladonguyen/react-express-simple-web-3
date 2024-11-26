@@ -1,15 +1,17 @@
 import { Outlet, useLoaderData } from "react-router-dom";
-import Home from "./Home";
-import Navigation from "../components/Navigation";
+import Header from "../components/Header";
+
+import classes from "./RootLayout.module.css";
 
 export default function RootLayout() {
 let token = useLoaderData();
 console.log("token router", token);
 
     return (
-        <>
-            <Navigation />
+    
+        <div className={classes.wrapper}>
+            <Header />
             <Outlet />
-        </>
+            </div>
     )
 }

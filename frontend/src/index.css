@@ -1,0 +1,38 @@
+body {
+
+    /* background-color: #7f50e4; */
+
+    /* nicer but more complex */
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse at top left, #7f50e4, #4c05d0);
+}
+
+/*reset*/
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+  
+  html {
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  /*typography*/
+  body {
+            
+    font-family: Arial;
+  }
+  
+  h1, h2{
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    padding: 1.6rem 0rem;
+  
+  }
