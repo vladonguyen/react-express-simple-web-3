@@ -3,30 +3,38 @@ div.formWrap {
     justify-content: center;
 }
 
-form.loginForm {
+form.createForm {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    flex-grow: 0.1;
+    flex-grow: 0.3;
 }
 
-form.loginForm input {
+form.createForm input {
     line-height: 2rem;
     padding: 0.5rem;
     border-radius: 4px;
     border-color: #FFF;
 }
 
-form.loginForm input::placeholder {
+form.createForm textarea {
+    line-height: 2rem;
+    min-height: 10rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border-color: #FFF;
+}
+
+form.createForm input::placeholder {
     padding: 0.5rem;
 }
 
-form.loginForm div.button {
+form.createForm div.button {
     display: flex;
     justify-content: center;
 }
 
-form.loginForm button {
+form.createForm button {
     display: flex;
     line-height: 2rem;
     font-weight: bold;
@@ -37,13 +45,13 @@ form.loginForm button {
     background-color: #bf87e9;
 }
 
-form.loginForm button:hover {
+form.createForm button:hover {
     background-color: #ca90f7;
 
 }
 
 @media screen and (max-width: 900px) {
-    form.loginForm {
+    form.createForm {
         flex-grow: 1;
     }
 }

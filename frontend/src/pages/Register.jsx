@@ -1,17 +1,26 @@
 import { Form, redirect } from "react-router-dom";
 import classes from "./Register.module.css";
 
+import { AiOutlineUserAdd } from "react-icons/ai";
+
+
 export default function Register() {
 
     return (
         <>
             <h1>Register</h1>
+            <div className={classes.formWrap}>            
             <Form method="post" className={classes.registerForm}>
                 <input type="email" name="email" placeholder="Email" />
                 <input type="password" name="password" placeholder="Password" minLength={6} />
                 <input type="password" name="repassword" placeholder="Re-type password" minLength={6} />
-                <button>Register</button>
+                <div className={classes.button}>
+                <button>REGISTER <AiOutlineUserAdd />
+                </button>
+                </div>
+                
             </Form>
+            </div>
         </>
     )
 }

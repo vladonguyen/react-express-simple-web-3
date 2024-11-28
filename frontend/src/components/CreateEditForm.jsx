@@ -1,15 +1,25 @@
 import { Form, redirect } from "react-router-dom";
 
+import classes from "./CreateEditForm.module.css";
+
+import { AiOutlineFileAdd } from "react-icons/ai";
+
+
 export default function CreateEditForm({ method, id, title, desc }) {
 
     return (
-        <>
-            <Form method={method} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                <input type="text" name="title" placeholder="Title" defaultValue={title? title : ""} />
-                <textarea name="desc" placeholder="Description"  defaultValue={desc? desc : ""}></textarea>
-                <button>{method === "POST"? "Create" : "Edit"}</button>
+
+        <div className={classes.formWrap}>
+            <Form method={method} style={{ display: "flex", flexDirection: "column", gap: "1rem" }} className={classes.createForm}>
+                <input type="text" name="title" placeholder="Title" defaultValue={title ? title : ""} />
+                <textarea name="desc" placeholder="Description" defaultValue={desc ? desc : ""}></textarea>
+                <div className={classes.button}>
+                    <button>{method === "POST" ? "CREATE  " : "EDIT"} &nbsp; <AiOutlineFileAdd />
+                    </button>
+                </div>
             </Form>
-        </>
+        </div>
+
     )
 }
 
@@ -27,7 +37,7 @@ export async function actionCreateEdit({ request, params }) {
 
         let url = "http://localhost:8080/api/create";
 
-        if(method === "PATCH"){
+        if (method === "PATCH") {
             url = `http://localhost:8080/api/posts/${params.id}`
         }
 
