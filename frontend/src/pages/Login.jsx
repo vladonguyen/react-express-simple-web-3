@@ -7,7 +7,7 @@ import { AiOutlineLogin } from "react-icons/ai";
 
 export default function Login() {
 const errors = useActionData();
-    console.log("errors", errors)
+    console.log("errors", errors?.message)
 
     return (
         <div className={classes.formWrap}>
@@ -44,12 +44,12 @@ export async function actionLogin({ request }) {
             body: JSON.stringify(loginData)
         });
         const resData = await response.json();
-        const token = resData.token;
-        if(token == undefined){
-            throw ({message: "Invalid credentials."})
-        }
-        console.log("token",token);
         
+        if(!response.ok){
+            throw new Error(resData.message || "Login failed.")
+        }
+   
+        const token = resData.token;
         localStorage.setItem("token", token);
         return redirect("/");
     } catch (error) {
