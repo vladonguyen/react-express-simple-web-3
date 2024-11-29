@@ -1,11 +1,12 @@
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useActionData } from "react-router-dom";
 import classes from "./Register.module.css";
 
 import { AiOutlineUserAdd } from "react-icons/ai";
 
 
 export default function Register() {
-
+    const errors = useActionData();
+    
     return (
         <>
             <h1>Register</h1>
@@ -14,6 +15,9 @@ export default function Register() {
                 <input type="email" name="email" placeholder="Email" />
                 <input type="password" name="password" placeholder="Password" minLength={6} />
                 <input type="password" name="repassword" placeholder="Re-type password" minLength={6} />
+                {errors && <div className={classes.errors}>
+                        {errors.message}
+                        </div>}
                 <div className={classes.button}>
                 <button>REGISTER <AiOutlineUserAdd />
                 </button>
@@ -25,9 +29,10 @@ export default function Register() {
     )
 }
 
+6
 
 export async function registerAction({ request }) {
-    {
+    
         try {
             const data = await request.formData();
             const registerData = {
@@ -42,16 +47,17 @@ export async function registerAction({ request }) {
                 body: JSON.stringify(registerData)
             });
 
-            response.json();
 
-            if (response.ok) {
-                return redirect("/");
+            if (!response.ok) {
+                const error = { message: "Something went wrong with registering user", status:500 }
+                throw error
+             
             }
+
+            return redirect("/");
         } catch (error) {
-            throw { message: error.message || "something went wrong with registering user", status: error.status || 500 }
+            
+            return  error
         }
 
-        return null
-
-    }
 }

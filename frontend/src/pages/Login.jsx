@@ -1,11 +1,13 @@
 import classes from "./Login.module.css";
 
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useActionData, useRouteError } from "react-router-dom";
 
 import { AiOutlineLogin } from "react-icons/ai";
 
 
 export default function Login() {
+const errors = useActionData();
+    console.log("errors", errors)
 
     return (
         <div className={classes.formWrap}>
@@ -13,6 +15,10 @@ export default function Login() {
                 <h1>Login</h1>
                 <input type="email" name="email" placeholder="Email" />
                 <input type="password" name="password" placeholder="Password" />
+                {errors && <div className={classes.errors}>
+                    {errors.message}
+                </div>
+                }
                 <div className={classes.button}>
                     <button>LOGIN &nbsp; <AiOutlineLogin />
                     </button>
@@ -39,10 +45,15 @@ export async function actionLogin({ request }) {
         });
         const resData = await response.json();
         const token = resData.token;
+        if(token == undefined){
+            throw ({message: "Invalid credentials."})
+        }
+        console.log("token",token);
+        
         localStorage.setItem("token", token);
         return redirect("/");
     } catch (error) {
-        throw (error.message || "Error login.")
+        return error
     }
     // todo fix auto login without any credentials
 

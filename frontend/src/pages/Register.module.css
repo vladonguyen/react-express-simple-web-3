@@ -47,3 +47,7 @@ form.registerForm button:hover {
         flex-grow: 1;
     }
 }
+
+div.errors {
+    color: red;
+}
