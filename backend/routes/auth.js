@@ -1,5 +1,6 @@
 const express = require("express");
 const { hash, compare } = require("bcryptjs");
+const {validate: validateEmail} = require("validateemail")
 
 const { createJSONwebToken, validateJSONwebToken } = require("../utils/auth");
 
@@ -25,6 +26,13 @@ router.post("/register", async (req, res, next) => {
             error.status = 400;
             throw error;
         };
+
+        if(!validateEmail(email)){
+            const error = new Error();
+            error.message = "Email is not valid"
+            error.status = 400;
+            throw error;
+        }
 
         const isEmailUnique = users.findIndex((user) => user.email == email);
         if (isEmailUnique != "-1") {
