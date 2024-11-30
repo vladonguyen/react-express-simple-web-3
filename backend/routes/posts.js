@@ -3,7 +3,7 @@ const express = require('express');
 const { v4: generateId } = require("uuid");
 //CREATE STORE VARIABLE
 
-let {posts} = require("../data/readWriteVariables");
+let {posts} = require("../data/PostsUsersDataVar");
 
 
 
