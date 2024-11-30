@@ -1,10 +1,12 @@
 //NEW need to add express
 const express = require('express');
 const { v4: generateId } = require("uuid");
-
 //CREATE STORE VARIABLE
 
-let posts = [{ "id": 1, "title": "Example title", "desc": "Example desc." }];
+let {posts} = require("../data/readWriteVariables");
+
+
+
 
 //NEW important way to set router and replaces direct app.crud
 const router = express.Router();
