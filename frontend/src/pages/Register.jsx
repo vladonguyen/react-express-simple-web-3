@@ -6,6 +6,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 
 export default function Register() {
     const errors = useActionData();
+    console.log(errors)
     
     return (
         <>
@@ -49,10 +50,15 @@ export async function registerAction({ request }) {
 
 
             if (!response.ok) {
-                const error = { message: "Something went wrong with registering user", status:500 }
-                throw error
+                const error = await response.json();
+                throw new Error(error.message || "Something went wrong with registration!")
              
             }
+
+            const {email, token} = await response.json();
+
+
+            localStorage.setItem("token", token);
 
             return redirect("/");
         } catch (error) {

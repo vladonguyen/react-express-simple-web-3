@@ -1,9 +1,8 @@
 //NEW need to add express
 const express = require('express');
-const { v4: generateId } = require("uuid");
+const { getAllPosts, getSinglePost, createNewPost, updatePost, deletePost } = require('../data/postActions');
 //CREATE STORE VARIABLE
 
-let {posts} = require("../data/PostsUsersStoredData");
 
 //NEW important way to set router and replaces direct app.crud
 const router = express.Router();
@@ -11,7 +10,7 @@ const router = express.Router();
 //GET ALL POSTS
 router.get("/api/posts", (req, res, next) => {
     try {
-        console.log("All posts get!")
+        let posts = getAllPosts();
         res.json(posts);
     } catch (error) {
         next(error);
@@ -22,9 +21,7 @@ router.get("/api/posts", (req, res, next) => {
 
 router.get("/api/posts/:id", (req, res, next) => {
     try {
-        const postIndex = posts.findIndex((post) => post.id == req.params.id);
-        console.log("Get single post with id " + postIndex)
-        const singlePost = posts[postIndex];
+        const singlePost = getSinglePost(req.params.id);
         res.json(singlePost);
     } catch (error) {
         next(error);
@@ -35,13 +32,7 @@ router.get("/api/posts/:id", (req, res, next) => {
 
 router.post("/api/create", (req, res, next) => {
     try {
-        const newPost = {
-            "id": generateId(),
-            ...req.body
-        }
-        posts.push(newPost);
-
-        console.log("New post created!");
+        const newPost = createNewPost(req.body);
         res.json(newPost).status(201);
     } catch (error) {
         next(error);
@@ -52,18 +43,12 @@ router.post("/api/create", (req, res, next) => {
 
 router.patch("/api/posts/:id", (req, res, next) => {
     try {
-
-        const postIndex = posts.findIndex((post) => post.id == req.params.id);
-        console.log("Edit single post with id " + req.params.id)
-
-        const editPost = {
-            "id": req.params.id,
-            ...req.body
-        }
-        posts[postIndex] = editPost;
+        const id = req.params.id;
+        const newBody = req.body;
+        const editPost = updatePost(id, newBody);
 
         res.json(editPost).status(201);
-    
+
     } catch (error) {
         next(error);
     }
@@ -73,10 +58,8 @@ router.patch("/api/posts/:id", (req, res, next) => {
 
 router.delete("/api/posts/:id/delete", (req, res, next) => {
     try {
-        const postIndex = posts.findIndex((post) => post.id == req.params.id);
-        console.log("Delete single post with id " + postIndex)
+        deletePost(req.params.id);
         res.json({ message: "Sucessful deletion" }).status(201);
-        posts = posts.filter((post)=> post.id != req.params.id);
     } catch (error) {
         next(error);
     }

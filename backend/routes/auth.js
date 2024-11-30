@@ -9,7 +9,16 @@ let {users} = require("../data/PostsUsersStoredData");
 
 //Add new user
 router.post("/register", async (req, res, next) => {
+    const email = req.body.email;
     try {
+        if(req.body.password.length < 6 ){
+            const error = new Error();
+            error.message = "Password is too short",
+            error.status = 400;
+            throw error;
+            
+        }
+
         if (req.body.password !== req.body.repassword) {
             const error = new Error();
             error.message = "Passwords don't match!"
@@ -17,7 +26,7 @@ router.post("/register", async (req, res, next) => {
             throw error;
         };
 
-        const isEmailUnique = users.findIndex((user) => user.email == req.body.email);
+        const isEmailUnique = users.findIndex((user) => user.email == email);
         if (isEmailUnique != "-1") {
             const error = new Error("User with this email is already registered");
             error.status = 409;
@@ -27,14 +36,16 @@ router.post("/register", async (req, res, next) => {
         const bcryptPass = await hash(req.body.password, 12);
 
         const newUser = {
-            email: req.body.email,
+            email: email,
             password: bcryptPass
         }
         console.log("bcryptPass", bcryptPass);
 
         users.push(newUser);
         console.log(users);
-        res.json("User added successfully!");
+
+        const token = await createJSONwebToken(email);
+        res.json({email, token});
     } catch (error) {
         next(error);
     }
