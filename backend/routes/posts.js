@@ -3,10 +3,7 @@ const express = require('express');
 const { v4: generateId } = require("uuid");
 //CREATE STORE VARIABLE
 
-let {posts} = require("../data/PostsUsersDataVar");
-
-
-
+let {posts} = require("../data/PostsUsersStoredData");
 
 //NEW important way to set router and replaces direct app.crud
 const router = express.Router();

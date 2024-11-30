@@ -5,7 +5,7 @@ const { createJSONwebToken, validateJSONwebToken } = require("../utils/auth");
 
 const router = express.Router();
 
-let {users} = require("../data/PostsUsersDataVar");
+let {users} = require("../data/PostsUsersStoredData");
 
 //Add new user
 router.post("/register", async (req, res, next) => {
