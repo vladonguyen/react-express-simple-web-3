@@ -7,7 +7,7 @@ import { actionCreateEdit } from "./components/CreateEditForm";
 import Edit from "./pages/Edit";
 import Register, { registerAction } from "./pages/Register";
 import Login, { actionLogin } from "./pages/Login";
-import { deleteToken, getToken } from "./utils/auth";
+import { checkLoginStatus, deleteToken, getToken } from "./utils/auth";
 import Error from "./pages/Error";
 
 
@@ -43,7 +43,8 @@ function App() {
       {
         path: "/create",
         element: <Create />,
-        action: actionCreateEdit
+        action: actionCreateEdit,
+        loader: checkLoginStatus
       },
       {
         path:"posts/:id",

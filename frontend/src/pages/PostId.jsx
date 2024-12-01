@@ -33,6 +33,11 @@ export default function PostId() {
 }
 
 export async function loaderPostById({ params }) {
+    const token = getToken();
+    if(!token){
+        return redirect("/login");
+    }
+    
     try {
         const postId = params.id;
         console.log("postId", postId)

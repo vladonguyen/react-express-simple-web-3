@@ -9,3 +9,11 @@ export function deleteToken(){
     localStorage.removeItem("token");
     return redirect("/");
 }
+
+export function checkLoginStatus(){
+    const token = getToken();
+    if(!token){
+        return redirect("/login");
+    }
+    return null;
+}
