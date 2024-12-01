@@ -1,6 +1,7 @@
 //NEW need to add express
 const express = require('express');
 const { getAllPosts, getSinglePost, createNewPost, updatePost, deletePost } = require('../data/postActions');
+const { checkAuth } = require('../utils/auth');
 //CREATE STORE VARIABLE
 
 
@@ -27,6 +28,10 @@ router.get("/api/posts/:id", (req, res, next) => {
         next(error);
     }
 });
+
+//NEW add AUTH CHECK
+
+router.use(checkAuth);
 
 //POST CREATE
 

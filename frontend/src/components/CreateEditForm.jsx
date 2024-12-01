@@ -3,6 +3,7 @@ import { Form, redirect } from "react-router-dom";
 import classes from "./CreateEditForm.module.css";
 
 import { AiOutlineFileAdd } from "react-icons/ai";
+import { getToken } from "../utils/auth";
 
 
 export default function CreateEditForm({ method, id, title, desc }) {
@@ -41,9 +42,14 @@ export async function actionCreateEdit({ request, params }) {
             url = `http://localhost:8080/api/posts/${params.id}`
         }
 
+        const token = getToken();
+
         const response = await fetch(url, {
             method: method,
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "token " + token
+             },
             body: JSON.stringify(dataFormNames)
         });
 

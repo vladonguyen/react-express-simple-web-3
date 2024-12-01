@@ -1,6 +1,7 @@
 import { Form, Link, redirect, useLoaderData, useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import classes from "./PostId.module.css";
+import { getToken } from "../utils/auth";
 
 export default function PostId() {
     const singlePost = useLoaderData();
@@ -52,13 +53,16 @@ export async function loaderPostById({ params }) {
 
 // ASK AND DELETE - EXERCISE MORE!
 export async function askBeforeDelete({ params }) {
-    console.log(params);
+    const token = getToken();
 
     const boolean = window.confirm("Do you want to delete this post?");
     if (boolean === true) {
         const response = await fetch(`http://localhost:8080/api/posts/${params.id}/delete`, {
             method: "DELETE",
-            headers: { "Content-Type": "application/json" }
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "token " + token
+            }
         })
 
         return redirect("/")

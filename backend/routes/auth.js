@@ -63,7 +63,7 @@ router.post("/register", async (req, res, next) => {
 //Login new user
 
 router.post("/login", async (req, res, next) => {
-    // console.log("req", req);
+    console.log("req", req);
     try {
         const email = req.body.email;
         const password = req.body.password;
