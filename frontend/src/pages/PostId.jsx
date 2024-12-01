@@ -1,22 +1,32 @@
 import { Form, Link, redirect, useLoaderData, useNavigate, useRouteLoaderData } from "react-router-dom";
 
+import classes from "./PostId.module.css";
+
 export default function PostId() {
     const singlePost = useLoaderData();
     const token = useRouteLoaderData("routetoken");
 
     return (
         <>
-            <h1>{singlePost.title}</h1>
-            <h1>{singlePost.desc}</h1>
+            <div className={classes.postBody}>
+                <div>
+                    <h1>{singlePost.title}</h1>
+                    <p>{singlePost.desc}</p>
+                </div>
 
-            {token && (
-                <>
-                 <p><Link to="edit">Edit</Link></p>
-                 {/* Form method is very important to be set! */}
-                 <Form method="POST"><button>Delete</button></Form>
-                 </>
-            )}
-           
+                {token && (
+                    <>
+                        <div className={classes.controls}>
+                            <div className={classes.edit}> <Link to="edit">Edit</Link></div>
+                            <div className={classes.delete}>
+                                {/* Form method is very important to be set! */}
+                                <Form method="POST"><button>Delete</button></Form>
+                            </div>
+                        </div>
+                    </>
+                )}
+            </div>
+
         </>
     )
 }

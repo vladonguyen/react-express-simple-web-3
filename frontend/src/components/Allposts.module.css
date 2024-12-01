@@ -7,6 +7,7 @@ div.singleNote {
 
 div.singleNote h3{
   color:#7337ab;
+  padding-bottom: 1rem;
 }
 div.singleNote h3:hover{
     color:#9248d7;

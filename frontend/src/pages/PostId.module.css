@@ -1,0 +1,48 @@
+div.postBody {
+    border-radius: 1rem ;
+    background-color: #c5accfd5;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+div.postBody p{
+    color:#581b92;
+  }
+
+  div.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1rem;
+  }
+
+  div.edit {
+    border-radius: 5px;
+    border: 1px solid #581b92;
+    background-color: #581b92;
+    padding: 5px 20px;
+  }
+
+  div.delete{
+    border-radius: 5px;
+    border: 1px solid #581b92;
+    background-color: #581b92;
+    padding: 5px 20px;
+  }
+
+  div.delete button {
+    /* reset button looks like a link*/
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    color: white ;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+  }
+
+  div.delete button:hover {
+    color: #d2cae9;
+  }
