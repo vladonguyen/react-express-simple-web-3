@@ -32,12 +32,20 @@ export default function PostId() {
     )
 }
 
-export async function loaderPostById({ params }) {
-    const token = getToken();
-    if(!token){
-        return redirect("/login");
+export async function loaderPostById({ params, request }) {
+
+    //check if it is edit page whether there is token
+    const currentUrl = new URL(request.url);
+    const isEditPage = currentUrl.pathname.endsWith("/edit");
+
+    if (isEditPage) {
+        const token = getToken();
+        if (!token) {
+            return redirect("/login");
+        }
     }
-    
+
+
     try {
         const postId = params.id;
         console.log("postId", postId)
