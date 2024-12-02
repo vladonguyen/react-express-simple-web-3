@@ -60,6 +60,12 @@ export async function registerAction({ request }) {
 
             localStorage.setItem("token", token);
 
+            //duration for auto logout after 1 h
+
+            const expiration = new Date();
+            expiration.setHours(expiration.getHours() + 1);
+            localStorage.setItem("expiration",expiration.toISOString());
+
             return redirect("/");
         } catch (error) {
             

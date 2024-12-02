@@ -51,6 +51,12 @@ export async function actionLogin({ request }) {
    
         const token = resData.token;
         localStorage.setItem("token", token);
+
+        //expiration for auto logout after 1h
+        const expiration = new Date();
+        expiration.setHours(expiration.getHours() + 1);
+        localStorage.setItem("expiration", expiration.toISOString());
+        
         return redirect("/");
     } catch (error) {
         return error
